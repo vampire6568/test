@@ -1,0 +1,39 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<iomanip>
+using namespace std;
+int main()
+{
+	int N, i, tmp;
+	vector<float>num;
+	vector<float>re;
+	while (scanf_s("%d", &N) != EOF)
+	{
+		float *a = new float[N];
+		for (i = 0; i < N; i++)
+		{
+			cin >> a[i];
+			num.push_back(a[i]);
+		}
+		sort(num.begin(), num.end());
+		//for (i = 0; i < N; i++)
+		//{
+		//	cout << num[i] << " ";
+		//}
+		if (N % 2 == 1)re.push_back(num[(N - 1) / 2]);
+		else re.push_back((num[N / 2] + num[N / 2 -1]) / 2);
+		delete[]a;
+		num.clear();
+	}
+	if (!re.empty())
+	{
+		for (i = 0; i < re.size(); i++)
+		{
+			cout<<fixed<<setprecision(2)<<re[i] << endl;
+		}
+	}
+	
+	system("pause");
+	return 0;
+}
