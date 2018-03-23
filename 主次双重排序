@@ -1,0 +1,75 @@
+#include<iostream>
+//#include<vector>
+//#include<algorithm>
+#include<string>
+using namespace std;
+const int N = 8;
+struct jiegou
+{
+	string str;
+	int chengji;
+};
+void quicksort(jiegou *a, int low, int high)
+{
+	int i = low, j = high;
+	jiegou temp = a[i];
+	while (i < j)
+	{
+		while (i < j&&temp.chengji <= a[j].chengji)j--;
+		if (i < j){ a[i] = a[j]; i++; }
+		while (i<j&&temp.chengji>a[i].chengji)i++;
+		if (i < j){ a[j] = a[i]; j--; }
+	}
+	a[i] = temp;
+	if (low < i)quicksort(a, low, i - 1);
+	if (high>j)quicksort(a, j + 1, high);
+}
+void quicksort1(jiegou *a, int low, int high)
+{
+	int i = low, j = high;
+	jiegou temp = a[i];
+	while (i < j)
+	{
+		while (i < j&&temp.str >= a[j].str)j--;
+		if (i < j){ a[i] = a[j]; i++; }
+		while (i<j&&temp.str<a[i].str)i++;
+		if (i < j){ a[j] = a[i]; j--; }
+	}
+	a[i] = temp;
+	if (low < i)quicksort1(a, low, i - 1);
+	if (high>j)quicksort1(a, j + 1, high);
+}
+int main()
+{
+	jiegou grade[N], temp;
+	//vector<jiegou>num;
+	int i, j, t=1;
+	for (i = 0; i < N; i++)
+	{
+		cin >> grade[i].str >> grade[i].chengji;
+		//num.push_back(grade[i]);
+	}
+	//sort(num.begin(), num.end());
+	//reverse(num.begin(), num.end());
+	quicksort(grade, 0, 7);
+	for (i = 0; i < N ;)
+	{
+		t = 1;
+		for (j = i + 1; j < N; j++)
+
+		{
+			if (grade[i].chengji == grade[j].chengji)t++;
+		}
+		if (t != 1)quicksort1(grade, i, i + t - 1);
+		i = i + t;
+	}
+	for (i = N - 1; i >= 0; i--)
+	{
+		cout << grade[i].str << " " << grade[i].chengji << endl;
+	}
+
+
+
+	//system("pause");
+	return 0;
+}
