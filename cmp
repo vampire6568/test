@@ -1,0 +1,39 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<string>
+using namespace std;
+struct xuesheng
+{
+	string str;
+	int chengji;
+};
+bool cmp(xuesheng a, xuesheng b)
+{
+	if (a.chengji != b.chengji)return b.chengji < a.chengji;
+	else
+	{
+		return a.str < b.str;
+	}
+}
+int main()
+{
+	vector<xuesheng>num;
+	xuesheng temp;
+	int N = 8;
+	while (N)
+	{
+		cin >> temp.str >> temp.chengji;
+		num.push_back(temp);
+		N--;
+	}
+		
+	
+	sort(num.begin(), num.end(), cmp);
+	for (int i = 0; i < num.size(); i++)
+	{
+		cout << num[i].str << " " << num[i].chengji << endl;
+	}
+	system("pause");
+	return 0;
+}
