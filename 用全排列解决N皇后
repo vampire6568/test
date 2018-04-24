@@ -1,1 +1,53 @@
+#include<iostream>
+//#include<vector>
+const int max = 100;
+int counting = 0;
+int P[max], hashtable[max] = { false };
+using namespace std;
 
+void f(int index, int N)
+{
+	int  i, j;
+
+	if (index == N + 1)
+	{
+		for (j = 1; j <= N; j++)
+		{
+			for (i = j + 1; i <= N; i++)
+			{
+				if (abs(j - i) == abs(P[i] - P[j]))return;//因为是全排列所以只需判断是否在一个斜线上
+			}
+
+		}
+		for (j = 1; j <= N; j++)
+		{
+			cout << P[j] << " ";
+		}
+		cout << endl;
+		counting++;
+		return;
+	}
+	//return;
+	for (i = 1; i <= N; i++)
+	{
+		if (hashtable[i] == false)
+		{
+			P[index] = i;
+			hashtable[i] = true;
+			f(index + 1, N);
+			hashtable[i] = false;
+		}
+	}
+
+
+
+}
+int main()
+{
+	int N;
+	cin >> N;
+	f(1, N);
+	cout << counting << endl;
+	system("pause");
+	return 0;
+}
