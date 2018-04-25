@@ -1,0 +1,45 @@
+#include<iostream>
+#include<vector>
+#include<string>
+using namespace std;
+struct node{
+	node *next;
+	node *head;
+	char fangxiang;
+};
+void insert(node *&list, char in){
+	node *temp = (node *)malloc(sizeof(node));
+	temp->fangxiang = in;
+	list->next = temp;
+	temp->head = list;
+	list = list->next;
+}
+int main()
+{
+	int N, i;
+	string str;
+	cin >> N;
+	cin >> str;
+	node *biao = (node *)malloc(sizeof(node));
+	node *P = biao;
+	biao->fangxiang = 'N';
+	insert(biao, 'E');
+	insert(biao, 'S');
+	insert(biao, 'W');
+	biao->next = P;
+	P->head = biao;
+	
+	for (i = 0; i < N; i++){
+		if (str[i] == 'L')P = P->head;
+		else
+		{
+
+			P = P->next;
+		}
+	}
+
+	cout << P->fangxiang;
+
+	system("pause");
+	return 0;
+}
